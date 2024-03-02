@@ -1,5 +1,5 @@
 # mautrix>=0.20.2,<0.21
-aiohttp>=3,<4
+aiohttp>3.9.1,<4
 yarl>=1,<2
 SQLAlchemy>=1,<1.4
 asyncpg>=0.20,<0.29
@@ -9,8 +9,9 @@ ruamel.yaml>=0.15.35,<0.18
 attrs>=18.1.0
 bcrypt>=3,<5
 packaging>=10
+dnspython>2.4,<3
 
 click>=7,<9
 colorama>=0.4,<0.5
 questionary>=1,<2
-jinja2>=2,<4
+jinja2>=3.1.3,<4
