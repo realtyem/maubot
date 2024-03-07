@@ -1,3 +1,41 @@
+# v0.5.1 (2025-01-03)
+
+* Updated Docker image to Alpine 3.21.
+* Updated media upload/download endpoints in management frontend
+  (thanks to [@domrim] in [#253]).
+* Fixed plugin web app base path not including a trailing slash
+  (thanks to [@jkhsjdhjs] in [#240]).
+* Changed markdown parsing to cut off plaintext body if necessary to allow
+  longer formatted messages.
+* Updated dependencies to fix Python 3.13 compatibility.
+
+[@domrim]: https://github.com/domrim
+[@jkhsjdhjs]: https://github.com/jkhsjdhjs
+[#253]: https://github.com/maubot/maubot/pull/253
+[#240]: https://github.com/maubot/maubot/pull/240
+
+# v0.5.0 (2024-08-24)
+
+* Dropped Python 3.9 support.
+* Updated Docker image to Alpine 3.20.
+* Updated mautrix-python to 0.20.6 to support authenticated media.
+* Removed hard dependency on SQLAlchemy.
+* Fixed `main_class` to default to being loaded from the last module instead of
+  the first if a module name is not explicitly specified.
+  * This was already the [documented behavior](https://docs.mau.fi/maubot/dev/reference/plugin-metadata.html),
+    and loading from the first module doesn't make sense due to import order.
+* Added simple scheduler utility for running background tasks periodically or
+  after a certain delay.
+* Added testing framework for plugins (thanks to [@abompard] in [#225]).
+* Changed `mbc build` to ignore directories declared in `modules` that are
+  missing an `__init__.py` file.
+  * Importing the modules at runtime would fail and break the plugin.
+    To include non-code resources outside modules in the mbp archive,
+    use `extra_files` instead.
+
+[#225]: https://github.com/maubot/maubot/issues/225
+[@abompard]: https://github.com/abompard
+
 # v0.4.2 (2023-09-20)
 
 * Updated Pillow to 10.0.1.

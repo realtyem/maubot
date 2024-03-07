@@ -31,7 +31,7 @@ from ..config import Config
 from ..lib.zipimport import ZipImportError, zipimporter
 from ..plugin_base import Plugin
 from .abc import IDConflictError, PluginClass, PluginLoader
-from .meta import PluginMeta
+from .meta import DatabaseType, PluginMeta
 
 current_version = Version(__version__)
 yaml = YAML()
@@ -155,9 +155,9 @@ class ZippedPluginLoader(PluginLoader):
         return file, meta
 
     @classmethod
-    def verify_meta(cls, source) -> tuple[str, Version]:
+    def verify_meta(cls, source) -> tuple[str, Version, DatabaseType | None]:
         _, meta = cls._read_meta(source)
-        return meta.id, meta.version
+        return meta.id, meta.version, meta.database_type if meta.database else None
 
     def _load_meta(self) -> None:
         file, meta = self._read_meta(self.path)
@@ -167,7 +167,7 @@ class ZippedPluginLoader(PluginLoader):
         if "/" in meta.main_class:
             self.main_module, self.main_class = meta.main_class.split("/")[:2]
         else:
-            self.main_module = meta.modules[0]
+            self.main_module = meta.modules[-1]
             self.main_class = meta.main_class
         self._file = file
 
