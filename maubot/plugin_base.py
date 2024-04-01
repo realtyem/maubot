@@ -20,14 +20,17 @@ from abc import ABC
 from asyncio import AbstractEventLoop
 
 from aiohttp import ClientSession
-from sqlalchemy.engine.base import Engine
 from yarl import URL
 
 from mautrix.util.async_db import Database, UpgradeTable
 from mautrix.util.config import BaseProxyConfig
 from mautrix.util.logging import TraceLogger
 
+from .scheduler import BasicScheduler
+
 if TYPE_CHECKING:
+    from sqlalchemy.engine.base import Engine
+
     from .client import MaubotMatrixClient
     from .loader import BasePluginLoader
     from .plugin_server import PluginWebApp
@@ -40,6 +43,7 @@ class Plugin(ABC):
     log: TraceLogger
     loop: AbstractEventLoop
     loader: BasePluginLoader
+    sched: BasicScheduler
     config: BaseProxyConfig | None
     database: Engine | Database | None
     webapp: PluginWebApp | None
@@ -53,11 +57,12 @@ class Plugin(ABC):
         instance_id: str,
         log: TraceLogger,
         config: BaseProxyConfig | None,
-        database: Engine | None,
+        database: Engine | Database | None,
         webapp: PluginWebApp | None,
         webapp_url: str | None,
         loader: BasePluginLoader,
     ) -> None:
+        self.sched = BasicScheduler(log=log.getChild("scheduler"))
         self.client = client
         self.loop = loop
         self.http = http
@@ -117,6 +122,7 @@ class Plugin(ABC):
             self.client.remove_event_handler(event_type, func)
         if self.webapp is not None:
             self.webapp.clear()
+        self.sched.stop()
         await self.stop()
 
     async def stop(self) -> None:
