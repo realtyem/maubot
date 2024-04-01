@@ -1,3 +1,21 @@
+# v0.5.0 (unreleased)
+
+* Fixed `main_class` to default to being loaded from the last module instead of
+  the first if a module name is not explicitly specified.
+  * This was already the [documented behavior](https://docs.mau.fi/maubot/dev/reference/plugin-metadata.html),
+    and loading from the first module doesn't make sense due to import order.
+* Added simple scheduler utility for running background tasks periodically or
+  after a certain delay.
+* Added testing framework for plugins (thanks to [@abompard] in [#225]).
+* Changed `mbc build` to ignore directories declared in `modules` that are
+  missing an `__init__.py` file.
+  * Importing the modules at runtime would fail and break the plugin.
+    To include non-code resources outside modules in the mbp archive,
+    use `extra_files` instead.
+
+[#225]: https://github.com/maubot/maubot/issues/225
+[@abompard]: https://github.com/abompard
+
 # v0.4.2 (2023-09-20)
 
 * Updated Pillow to 10.0.1.
