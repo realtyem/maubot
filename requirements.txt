@@ -13,6 +13,7 @@ dnspython>2.4,<3
 signedjson>=1.1.4
 more-itertools>=10.2.0
 canonicaljson>=2.0.0
+backoff>=2.2.1
 
 click>=7,<9
 colorama>=0.4,<0.5
