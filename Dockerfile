@@ -5,42 +5,44 @@ RUN cd /frontend && yarn --prod && yarn build
 
 FROM alpine:3.18
 
-RUN apk add --no-cache \
-        python3 py3-pip py3-setuptools py3-wheel \
-        ca-certificates \
-        su-exec \
-        yq \
-        py3-aiohttp \
-        py3-sqlalchemy \
-        py3-attrs \
-        py3-bcrypt \
-        py3-cffi \
-        py3-ruamel.yaml \
-        py3-jinja2 \
-        py3-click \
-        py3-packaging \
-        py3-markdown \
-        py3-alembic \
-        py3-cssselect \
-        py3-commonmark \
-        py3-pygments \
-        py3-tz \
-        py3-regex \
-        py3-wcwidth \
+RUN apk add --no-cache python3
+RUN apk add --no-cache py3-pip
+RUN apk add --no-cache py3-setuptools
+RUN apk add --no-cache py3-wheel
+RUN apk add --no-cache ca-certificates
+RUN apk add --no-cache su-exec
+RUN apk add --no-cache yq
+RUN apk add --no-cache py3-aiohttp
+RUN apk add --no-cache py3-sqlalchemy
+RUN apk add --no-cache py3-attrs
+RUN apk add --no-cache py3-bcrypt
+RUN apk add --no-cache py3-cffi
+RUN apk add --no-cache py3-ruamel.yaml
+RUN apk add --no-cache py3-jinja2
+RUN apk add --no-cache py3-click
+RUN apk add --no-cache py3-packaging
+RUN apk add --no-cache py3-markdown
+RUN apk add --no-cache py3-alembic
+RUN apk add --no-cache py3-cssselect
+RUN apk add --no-cache py3-commonmark
+RUN apk add --no-cache py3-pygments
+RUN apk add --no-cache py3-tz
+RUN apk add --no-cache py3-regex
+RUN apk add --no-cache py3-wcwidth
         # encryption
-        py3-cffi \
-        py3-olm \
-        py3-pycryptodome \
-        py3-unpaddedbase64 \
-        py3-future \
-        # plugin deps
-        #py3-pillow \
-        py3-magic \
-        py3-feedparser \
-        py3-dateutil \
-        py3-lxml \
-        py3-semver \
-  && apk add --no-cache py3-pillow --repository=https://dl-cdn.alpinelinux.org/alpine/edge/community
+RUN apk add --no-cache py3-cffi
+RUN apk add --no-cache py3-olm
+RUN apk add --no-cache py3-pycryptodome
+RUN apk add --no-cache py3-unpaddedbase64
+RUN apk add --no-cache py3-future
+# plugin deps
+# py3-pillow
+RUN apk add --no-cache py3-magic
+RUN apk add --no-cache py3-feedparser
+RUN apk add --no-cache py3-dateutil
+RUN apk add --no-cache py3-lxml
+RUN apk add --no-cache py3-semver
+# RUN apk add --no-cache py3-pillow --repository=https://dl-cdn.alpinelinux.org/alpine/edge/community
 # TODO remove pillow, magic, feedparser, lxml, gitlab and semver when maubot supports installing dependencies
 
 COPY requirements.txt /opt/maubot/requirements.txt

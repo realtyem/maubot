@@ -9,6 +9,7 @@ ruamel.yaml>=0.15.35,<0.18
 attrs>=18.1.0
 bcrypt>=3,<5
 packaging>=10
+pillow>=10.3.0
 dnspython>2.4,<3
 signedjson>=1.1.4
 more-itertools>=10.2.0
