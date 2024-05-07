@@ -281,9 +281,9 @@ class Client(DBClient):
                             lazy_load_members=True,
                         ),
                     ),
-                    presence=EventFilter(
-                        not_types=[EventType.PRESENCE],
-                    ),
+                    # presence=EventFilter(
+                    #     not_types=[EventType.PRESENCE],
+                    # ),
                 )
             )
             await self.update()
