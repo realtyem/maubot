@@ -1,5 +1,6 @@
-mautrix>=0.20.7,<0.21
 aiohttp>=3,<4
+# Install mautrix manually in the dockerfile
+# mautrix>=0.20.7,<0.21
 yarl>=1,<2
 asyncpg>=0.20,<1
 aiosqlite>=0.16,<1
