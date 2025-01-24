@@ -49,7 +49,7 @@ RUN apk add --virtual .build-deps python3-dev build-base git \
     && pip3 install --break-system-packages -r requirements.txt -r optional-requirements.txt \
         dateparser langdetect python-gitlab pyquery tzlocal \
     && git clone -b sync-presence https://github.com/realtyem/mautrix-python.git ./mautrix-python \
-    && pip3 install -e ./mautrix-python \
+    && pip3 install --break-system-packages -e ./mautrix-python \
     && apk del .build-deps
 # TODO also remove dateparser, langdetect and pyquery when maubot supports installing dependencies
 
